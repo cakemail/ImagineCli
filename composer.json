@@ -1,4 +1,18 @@
 {
+    "name": "imagine_cli/imagine_cli",
+    "description": "Command line tool for the Imagine library using the Symfony2 Console component",
+    "keywords": [
+        "image manipulation",
+        "image processing",
+        "drawing",
+        "graphics"
+    ],
+    "authors": [
+      {
+          "name": "Willem van der Jagt",
+          "homepage": "http://github.com/wkjagt"
+      }
+    ],
     "require" : {
         "imagine/Imagine": "v0.4.1",
         "symfony/console": "v2.1.7"
