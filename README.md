@@ -20,9 +20,10 @@ require: {
 
 ##Usage
 
-### crop using all paramaters
+### crop using all options
 
-Crop source.png, starting at the pixel at x=20, y=20, and crop out a size 400 pixels wide and 300 pixels high
+Crop source.png, starting at the pixel at x=20, y=20, and crop out a size 400 pixels wide and 300 pixels high and
+save as destination.png
 
 ```
 ./imagine_cli crop source.png destination.png --cropx=20 --cropy=20 --cropwidth=400 --cropheight=300
@@ -54,4 +55,16 @@ resize also takes the crop options so that the result of the crop will be resize
 ./imagine_cli resize source.png destination.png --width=400 --height=300 --cropx=20 --cropy=20 --cropwidth=400 --cropheight=300
 ```
 
-WORK IN PROGRESS!
+#More information
+
+```
+./imagine_cli help crop
+```
+
+and
+
+```
+./imagine_cli help resize
+```
+
+I will add more commands and/or options as I need them. Need more now? Fork! :-) WORK IN PROGRESS!
