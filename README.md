@@ -5,6 +5,19 @@ Command line interface for [avalanche123/Imagine](https://github.com/avalanche12
 [Console](https://github.com/symfony/Console) component. Mainly done to suit my own needs, so it may not have
 the features you need, but feel free to fork and send pull requests.
 
+
+##Installation
+
+###Using composer (only way for now)
+
+add this to your `composer.json`
+
+```
+require: {
+    "imagine_cli/imagine_cli": "dev-master"
+}
+```
+
 ##Usage
 
 ### crop using all paramaters
