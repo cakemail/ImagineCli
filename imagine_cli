@@ -7,5 +7,6 @@ use Symfony\Component\Console\Application;
 
 $console = new Application();
 $console->add(new ImagineCli\Command\Resize);
+$console->add(new ImagineCli\Command\Crop);
 
 $console->run();
