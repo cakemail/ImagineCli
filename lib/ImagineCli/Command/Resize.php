@@ -7,10 +7,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Imagine\Image\Box;
-use Imagine\Image\Point;
-use Imagine\Image\ImageInterface;
-
 
 class Resize extends ImagineCommand
 {
@@ -29,8 +25,8 @@ class Resize extends ImagineCommand
             ->addOption('cropx', null, InputOption::VALUE_REQUIRED, 'X coordinate to start crop')
             ->addOption('cropy', null, InputOption::VALUE_REQUIRED, 'Y coordinate to start crop')
 
-            // ->addOption('cropwidth', null, InputOption::VALUE_REQUIRED, 'Y coordinate to start crop')
-            // ->addOption('cropwidth', null, InputOption::VALUE_REQUIRED, 'Y coordinate to start crop')
+            ->addOption('cropwidth', null, InputOption::VALUE_REQUIRED, 'Width of the crop')
+            ->addOption('cropheight', null, InputOption::VALUE_REQUIRED, 'height of the crop')
         ;
     }
 
@@ -41,25 +37,21 @@ class Resize extends ImagineCommand
         $source = $input->getArgument('source');
         $destination = $input->getArgument('destination');
 
+        $image = $this->getImage(array('source' => $source));
 
-        // resize
-        $width = $input->getOption('width');
-        $height = $input->getOption('height');
+        $this->crop($image, array(
+            'cropx' => $input->getOption('cropx'),
+            'cropy' => $input->getOption('cropy'),
+            'cropwidth' => $input->getOption('cropwidth'),
+            'cropheight' => $input->getOption('cropheight'),
+        ));
 
-        $cropx = $input->getOption('cropx');
-        $cropy = $input->getOption('cropy');
+        $this->resize($image, array(
+            'width' => $input->getOption('width'),
+            'height' => $input->getOption('height')
+        ));
 
-        $image = $this->getImage($source);
-
-
-        // crop
-        $image->crop(new Point(10, 10), new Box(100, 100));
-
-
-        $image->resize(new Box($width, $height));
-
-
-        $image->save($destination);
+        $this->save($image, array('destination' => $destination));
     }
 
 }
