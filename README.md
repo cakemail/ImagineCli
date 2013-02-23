@@ -7,6 +7,38 @@ the features you need, but feel free to fork and send pull requests.
 
 ##Usage
 
-php imagine_cli.php resize source.png destination.png --width=400 --height=300
+### crop using all paramaters
 
-WORK IN PROGRESS
+Crop source.png, starting at the pixel at x=20, y=20, and crop out a size 400 pixels wide and 300 pixels high
+
+```
+./imagine_cli crop source.png destination.png --cropx=20 --cropy=20 --cropwidth=400 --cropheight=300
+```
+
+### all options are optional
+
+Cropping can be done with only a couple of parameters set. For example, this crop will remove a 20 pixels from
+the left of the image
+
+```
+./imagine_cli crop source.png destination.png --cropx=20
+```
+
+
+## resize
+
+Resize an image to 400 pixels wide, and 300 pixels high
+
+```
+./imagine_cli resize source.png destination.png --width=400 --height=300
+```
+
+## crop and resize
+
+resize also takes the crop options so that the result of the crop will be resized. An example using all options:
+
+```
+./imagine_cli resize source.png destination.png --width=400 --height=300 --cropx=20 --cropy=20 --cropwidth=400 --cropheight=300
+```
+
+WORK IN PROGRESS!
