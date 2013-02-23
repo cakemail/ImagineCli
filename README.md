@@ -41,4 +41,4 @@ resize also takes the crop options so that the result of the crop will be resize
 ./imagine_cli resize source.png destination.png --width=400 --height=300 --cropx=20 --cropy=20 --cropwidth=400 --cropheight=300
 ```
 
-WORK IN PROGRESS
+WORK IN PROGRESS!
