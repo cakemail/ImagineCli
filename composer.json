@@ -23,5 +23,5 @@
             "ImagineCli": "lib/"
         }
     },
-    "bin": ["bin/imagine_cli"],
+    "bin": ["bin/imagine_cli"]
 }
