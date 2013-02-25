@@ -24,6 +24,6 @@
         }
     },
     "config" : {
-        "bin" : ["bin/imagine_cli"]
+        "bin-dir" : ["bin/imagine_cli"]
     }
 }
