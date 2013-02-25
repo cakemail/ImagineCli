@@ -23,7 +23,5 @@
             "ImagineCli": "lib/"
         }
     },
-    "config" : {
-        "bin-dir" : ["bin/imagine_cli"]
-    }
+    "bin": ["bin/imagine_cli"],
 }
