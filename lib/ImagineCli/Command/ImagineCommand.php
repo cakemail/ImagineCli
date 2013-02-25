@@ -102,14 +102,22 @@ class ImagineCommand extends Command
 
         $size = $image->getSize();
 
-        $width = array_key_exists('width', $options)
-                        ? $options['width'] : $size->getWidth();
+        $width = @$options['width'];
+        $height = @$options['height'];
 
-        $height = array_key_exists('height', $options)
-                        ? $options['height'] : $size->getHeight();
+        if($width && $height) {
+            $box = new Box($width, $height);
+        } else {
+            $box = new Box($size->getWidth(), $size->getHeight());
+            if(! $height) {
+                $box = $box->widen($width);
+            } elseif(! $width) {
+                $box = $box->heighten($height);
+            }
+        }
 
         try {
-            $image->resize(new Box($width, $height));
+            $image->resize($box);
 
         } catch(Exception $e) {
 

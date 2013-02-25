@@ -10,6 +10,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Resize extends ImagineCommand
 {
+    const CROP_FIRST = 0;
+
+    const RESIZE_FIRST = 1;
+
     protected function configure()
     {
         $this
@@ -27,6 +31,8 @@ class Resize extends ImagineCommand
 
             ->addOption('cropwidth', null, InputOption::VALUE_REQUIRED, 'Width of the crop')
             ->addOption('cropheight', null, InputOption::VALUE_REQUIRED, 'height of the crop')
+
+            ->addOption('cropfirst', null, InputOption::VALUE_NONE, 'Use to crop before resizing')
         ;
     }
 
@@ -39,18 +45,33 @@ class Resize extends ImagineCommand
 
         $image = $this->getImage(array('source' => $source));
 
-        $this->crop($image, array(
-            'cropx' => $input->getOption('cropx'),
-            'cropy' => $input->getOption('cropy'),
-            'cropwidth' => $input->getOption('cropwidth'),
-            'cropheight' => $input->getOption('cropheight'),
-        ));
+        $order = $input->getOption('cropfirst')
+                            ? self::CROP_FIRST : self::RESIZE_FIRST;
 
-        $this->resize($image, array(
-            'width' => $input->getOption('width'),
-            'height' => $input->getOption('height')
-        ));
+        $orders = array(
+            self::RESIZE_FIRST => array('resize', 'crop'),
+            self::CROP_FIRST => array('crop', 'resize')
+        );
 
+        foreach($orders[$order] as $action) {
+
+            switch($action) {
+                case 'resize':
+                    $this->resize($image, array(
+                        'width' => $input->getOption('width'),
+                        'height' => $input->getOption('height')
+                    ));
+                    break;
+                case 'crop':
+                    $this->crop($image, array(
+                        'cropx' => $input->getOption('cropx'),
+                        'cropy' => $input->getOption('cropy'),
+                        'cropwidth' => $input->getOption('cropwidth'),
+                        'cropheight' => $input->getOption('cropheight'),
+                    ));
+                    break;
+            }
+        }
         $this->save($image, array('destination' => $destination));
     }
 
