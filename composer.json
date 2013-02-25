@@ -22,5 +22,8 @@
         "psr-0": {
             "ImagineCli": "lib/"
         }
+    },
+    "config" : {
+        "bin" : ["bin/imagine_cli"]
     }
 }
