@@ -23,8 +23,8 @@ class Resize extends ImagineCommand
             ->addArgument('source', InputArgument::REQUIRED, 'Path to original image file')
             ->addArgument('destination', InputArgument::REQUIRED, 'Path to destination file')
 
-            ->addOption('width', null, InputOption::VALUE_REQUIRED, 'The width of the resized image')
-            ->addOption('height', null, InputOption::VALUE_REQUIRED, 'The height of the resized image')
+            ->addOption('width', null, InputOption::VALUE_OPTIONAL, 'The width of the resized image')
+            ->addOption('height', null, InputOption::VALUE_OPTIONAL, 'The height of the resized image')
 
             ->addOption('cropx', null, InputOption::VALUE_REQUIRED, 'X coordinate to start crop')
             ->addOption('cropy', null, InputOption::VALUE_REQUIRED, 'Y coordinate to start crop')
