@@ -16,7 +16,7 @@
     ],
     "require" : {
         "imagine/Imagine": "v0.4.1",
-        "symfony/console": "v2.1.7"
+        "symfony/console": "v2.2.1"
     },
     "autoload": {
         "psr-0": {
