@@ -13,6 +13,12 @@ use Exception;
 
 class ImagineCommand extends Command
 {
+    const ERROR_CROP_TOO_LARGE = 1;
+
+    const ERROR_CROP_OUTSIDE = 2;
+
+    const ERROR_UNKNOWN = 128;
+
     /**
      * OutputInterface
      *    the output of the console application
@@ -74,12 +80,20 @@ class ImagineCommand extends Command
         $cropHeight = is_null($options['cropheight'])
                             ? $size->getHeight() - $cropy : $options['cropheight'];
 
+        if($cropx + $cropWidth > $size->getWidth() || $cropy + $cropHeight > $size->getHeight()) {
+            $this->writeError('Cropping outside image', self::ERROR_CROP_TOO_LARGE);
+        }
+
+        if($cropWidth > $size->getWidth() || $cropHeight > $size->getHeight()) {
+            $this->writeError('Crop size exceeds image size', self::ERROR_CROP_TOO_LARGE);
+        }
+
         try {
             $image->crop(new Point($cropx, $cropy), new Box($cropWidth, $cropHeight));
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
 
-            $this->writeError($e->getMessage());
+            $this->writeError($e->getMessage(), self::ERROR_UNKNOWN);
         }
     }
 
@@ -172,10 +186,10 @@ class ImagineCommand extends Command
      * @param string $error
      *    the error message
      */
-    protected function writeError($error)
+    protected function writeError($error, $code = 128)
     {
         $this->output->writeln(sprintf('<error>%s</error>', $error));
-        exit(1);
+        exit($code);
     }
 
 }
